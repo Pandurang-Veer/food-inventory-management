@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}FreshStock | Food Inventory{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+{% if session.get('user_id') %}
+<div class="app-shell">
+  <aside class="sidebar">
+    <a class="brand" href="{{ url_for('home') }}"><span class="brand-icon">F</span><span>FreshStock<small>Food Inventory</small></span></a>
+    <div class="nav-label">WORKSPACE</div>
+    <nav>
+      <a href="{{ url_for('home') }}">▦ <span>Dashboard</span></a>
+      <a href="{{ url_for('items_page') }}">▤ <span>Food Items</span></a>
+      <a href="{{ url_for('suppliers_page') }}">♧ <span>Suppliers</span></a>
+      <a href="{{ url_for('purchases_page') }}">＋ <span>Purchases & Batches</span></a>
+      <a href="{{ url_for('consume_page') }}">⇣ <span>FIFO Consumption</span></a>
+      <a href="{{ url_for('wastage_page') }}">♲ <span>Wastage</span></a>
+      <a href="{{ url_for('reports_page') }}">▥ <span>Reports</span></a>
+    </nav>
+    <div class="sidebar-bottom"><div class="avatar">{{ session.get('name','A')[:1] }}</div><div><b>{{ session.get('name','Admin') }}</b><small>Administrator</small></div><a class="logout" href="{{ url_for('logout') }}">↗</a></div>
+  </aside>
+  <main class="main">
+    <header class="topbar"><div><span class="eyebrow">INVENTORY WORKSPACE</span><h2>{% block page_heading %}Overview{% endblock %}</h2></div><div class="top-actions"><span class="today">{{ now_label if now_label else '' }}</span><span class="user-pill">● Online</span></div></header>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}<div class="flash-wrap">{% for category, message in messages %}<div class="flash {{ category }}">{{ message }}</div>{% endfor %}</div>{% endif %}
+    {% endwith %}
+    <section class="content">{% block content %}{% endblock %}</section>
+    <footer>FreshStock · Food Inventory Management System <span>TY B.Sc. Computer Science Project</span></footer>
+  </main>
+</div>
+{% else %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}<div class="login-flashes">{% for category, message in messages %}<div class="flash {{ category }}">{{ message }}</div>{% endfor %}</div>{% endif %}
+{% endwith %}
+{% block public_content %}{% endblock %}
+{% endif %}
+</body></html>
