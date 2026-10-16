@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Sign in | FreshStock{% endblock %}
+{% block public_content %}
+<div class="login-page">
+  <div class="login-art">
+    <div class="login-logo">F</div>
+    <p class="eyebrow">SMART FOOD OPERATIONS</p>
+    <h1>Less waste.<br>More control.</h1>
+    <p>Manage food inventory, track expiry dates, and rotate stock with FIFO — all in one workspace.</p>
+    <div class="login-art-bottom">BUILT FOR RESTAURANTS · HOTELS · CANTEENS</div>
+  </div>
+  <div class="login-panel">
+    <div class="login-form">
+      <div class="mobile-brand">FreshStock</div>
+      <p class="eyebrow">WELCOME BACK</p>
+      <h2>Sign in to your workspace</h2>
+      <p class="muted">Enter your project demo credentials to continue.</p>
+      <form method="post">
+        <label>Username</label>
+        <input name="username" placeholder="Enter username" required autocomplete="username">
+        <label>Password</label>
+        <input name="password" type="password" placeholder="Enter password" required autocomplete="current-password">
+        <button class="btn primary full" type="submit">Sign in <span>→</span></button>
+      </form>
+      <div class="demo-credentials">
+        <b>Demo credentials</b>
+        <div>Username: <code>admin</code></div>
+        <div>Password: <code>admin123</code></div>
+        <small>Change these before using the app beyond a classroom demo.</small>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
